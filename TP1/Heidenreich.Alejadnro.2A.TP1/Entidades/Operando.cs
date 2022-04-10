@@ -35,9 +35,10 @@ namespace Entidades
 
         private double ValidarOperando(string strNumero)
         {
-            double retorno = 0;
-
-            double.TryParse(strNumero, out retorno);
+            if (!double.TryParse(strNumero, out double retorno))
+            {
+                retorno = 0;
+            }
 
             return retorno;
         }
