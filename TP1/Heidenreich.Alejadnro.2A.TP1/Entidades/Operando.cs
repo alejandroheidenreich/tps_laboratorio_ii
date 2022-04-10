@@ -57,7 +57,6 @@ namespace Entidades
 
         public static string DecimalBinario(double numero)
         {
-            string retorno = string.Empty;
             string binario = string.Empty;
             int resultado = (int)numero;
             int resto;
@@ -66,22 +65,17 @@ namespace Entidades
             {
                 resto = resultado % 2;
 
-                binario = binario + resto.ToString();
+                binario = resto.ToString() + binario;
                 resultado /= 2;
             }
 
-            for (int i = binario.Length - 1; i >= 0; i--)
-            {
-                retorno += binario[i];
-            }
-            return retorno;
+            return binario;
         }
 
         public static string DecimalBinario(string numero)
         {
             string retorno = "Valor inválido";
-            double nDecimal;
-            if(double.TryParse(numero, out nDecimal))
+            if(double.TryParse(numero, out double nDecimal))
             {
                 retorno = DecimalBinario(nDecimal);
 
@@ -115,7 +109,7 @@ namespace Entidades
 
         public static double operator +(Operando n1, Operando n2)
         {
-            return n1.numero+n2.numero;
+            return n1.numero + n2.numero;
         }
 
         public static double operator -(Operando n1, Operando n2)
@@ -125,11 +119,12 @@ namespace Entidades
 
         public static double operator *(Operando n1, Operando n2)
         {
-            return (n1.numero * n2.numero);
+            return n1.numero * n2.numero;
         }
 
         public static double operator /(Operando n1, Operando n2)
         {
+
             if (n2.numero != 0)
             {
                 return n1.numero / n2.numero;

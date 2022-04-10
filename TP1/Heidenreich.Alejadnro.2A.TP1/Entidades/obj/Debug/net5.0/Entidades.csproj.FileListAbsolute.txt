@@ -9,3 +9,4 @@ C:\Users\tentative\Desktop\tps_laboratorio_ii\TP1\Heidenreich.Alejadnro.2A.TP1\E
 C:\Users\tentative\Desktop\tps_laboratorio_ii\TP1\Heidenreich.Alejadnro.2A.TP1\Entidades\obj\Debug\net5.0\Entidades.dll
 C:\Users\tentative\Desktop\tps_laboratorio_ii\TP1\Heidenreich.Alejadnro.2A.TP1\Entidades\obj\Debug\net5.0\ref\Entidades.dll
 C:\Users\tentative\Desktop\tps_laboratorio_ii\TP1\Heidenreich.Alejadnro.2A.TP1\Entidades\obj\Debug\net5.0\Entidades.pdb
+C:\Users\tentative\Desktop\tps_laboratorio_ii\TP1\Heidenreich.Alejadnro.2A.TP1\Entidades\obj\Debug\net5.0\Entidades.csproj.AssemblyReference.cache
