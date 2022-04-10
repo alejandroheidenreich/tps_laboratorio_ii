@@ -13,34 +13,23 @@ namespace MiCalculadora
 {
     public partial class FormCalculadora : Form
     {
+        string[] opArray = new string[] { "", "+", "-", "*", "/" };
+
         public FormCalculadora()
         {
-            InitializeComponent();
-            this.Text = "Calculadora de Alejandro Heidenreich del curso 2°A";
-            this.StartPosition = FormStartPosition.CenterScreen;
-            string[] opArray = new string[] { "+", "-", "*", "/", "" };
-            cmbOperador.Items.AddRange(opArray);
-            lstOperaciones.TabStop = false;
-            lblResultado.TabStop = false;
+            InitializeComponent();     
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void FormCalculadora_Load(object sender, EventArgs e)
         {
+            cmbOperador.Items.AddRange(opArray);
             Limpiar();
             
         }
 
-        private void cmbOperador_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //cmbOperador.Items.Add("");
-        }
-
         private void FormCalculadora_FormClosing(object sender, FormClosingEventArgs e)
         {
-           
-
-            DialogResult rta = MessageBox.Show("¿Está seguro de querer salir?", "Salir",
-                                                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult rta = MessageBox.Show("¿Está seguro de querer salir?", "Salir",MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (rta == DialogResult.Yes)
             {
@@ -62,7 +51,7 @@ namespace MiCalculadora
             lstOperaciones.Items.Clear();
             txtNumero1.Clear();
             txtNumero2.Clear();
-            cmbOperador.SelectedIndex = 4;
+            cmbOperador.SelectedIndex = -1;
             lblResultado.Text = "0";
             
         }
@@ -74,8 +63,14 @@ namespace MiCalculadora
 
         private void btnOperar_Click(object sender, EventArgs e)
         {
+            string op = cmbOperador.Text;
+
             lblResultado.Text = Operar(txtNumero1.Text, txtNumero2.Text, cmbOperador.Text).ToString();
-            lstOperaciones.Items.Add($"{txtNumero1.Text} {cmbOperador.Text} {txtNumero2.Text} = {lblResultado.Text}");
+            if (op == "")
+            {
+                op = "+";
+            }
+            lstOperaciones.Items.Add($"{ValidarTxtBox(txtNumero1.Text)} {op} {ValidarTxtBox(txtNumero2.Text)} = {lblResultado.Text}");
         }
 
         private static double Operar(string numero1, string numero2, string operador)
@@ -91,20 +86,28 @@ namespace MiCalculadora
             return Calculadora.Operar(num1, num2, operador.ToCharArray()[0]);
         }
 
-        private void lblResultado_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnConvertirABinario_Click(object sender, EventArgs e)
         {
-           
-            lstOperaciones.Items.Add($"{txtNumero1.Text} = {Operando.DecimalBinario(txtNumero1.Text)}");
+            string resultado = Operando.DecimalBinario(lblResultado.Text);
+            lstOperaciones.Items.Add($"{lblResultado.Text} = {resultado}");
+            lblResultado.Text = resultado;
         }
 
         private void btnConvertirADecimal_Click(object sender, EventArgs e)
         {
-            lstOperaciones.Items.Add($"{txtNumero1.Text} = {Operando.BinarioDecimal(txtNumero1.Text)}");
+            string resultado = Operando.BinarioDecimal(lblResultado.Text);
+            lstOperaciones.Items.Add($"{lblResultado.Text} = {resultado}");
+            lblResultado.Text = resultado;
+        }
+
+        private double ValidarTxtBox(string strNumero)
+        {
+            if(!double.TryParse(strNumero, out double retorno))
+            {
+                retorno = 0;
+            }
+
+            return retorno;
         }
     }
 }
