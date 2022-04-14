@@ -10,6 +10,14 @@ namespace Entidades
     {
         private double numero;
 
+        /// <summary>
+        /// <set>
+        /// Asignará un valor al atributo número, previa validación.
+        /// </set>
+        /// <get>
+        /// NULL
+        /// </get>
+        /// </summary>
         private string Numero 
         {
             set
@@ -18,21 +26,37 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// El constructor por defecto (sin parámetros) asignará valor 0 al atributo numero
+        /// </summary>
         public Operando()
         {
             this.numero = 0;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="numero"></param>
         public Operando(double numero)
         {
             this.numero = numero;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strNumero"></param>
         public Operando(string strNumero)
         {
             this.Numero = strNumero;
         }
 
+        /// <summary>
+        /// comprueba que el valor recibido sea numérico, y lo retornará en formato double. Caso contrario, retornará 0.
+        /// </summary>
+        /// <param name="strNumero"></param>
+        /// <returns></returns>
         private double ValidarOperando(string strNumero)
         {
             if (!double.TryParse(strNumero, out double retorno))
@@ -43,6 +67,11 @@ namespace Entidades
             return retorno;
         }
 
+        /// <summary>
+        /// valida que la cadena de caracteres esté compuesta SOLAMENTE por caracteres '0' o '1'
+        /// </summary>
+        /// <param name="binario"></param>
+        /// <returns></returns>
         private static bool EsBinario(string binario)
         {
             foreach (char i in binario)
@@ -55,6 +84,11 @@ namespace Entidades
             return true;
         }
 
+        /// <summary>
+        /// convierte un número decimal a binario
+        /// </summary>
+        /// <param name="numero"></param>
+        /// <returns></returns>
         public static string DecimalBinario(double numero)
         {
             string binario = string.Empty;
@@ -72,6 +106,11 @@ namespace Entidades
             return binario;
         }
 
+        /// <summary>
+        /// valida que se trate de un binario y luego llama a su sobrecarga :double, en caso de ser posible. Caso contrario retornará "Valor inválido"
+        /// </summary>
+        /// <param name="numero"></param>
+        /// <returns></returns>
         public static string DecimalBinario(string numero)
         {
             string retorno = "Valor inválido";
@@ -84,13 +123,15 @@ namespace Entidades
             return retorno;
         }
 
+        /// <summary>
+        /// valida que se trate de un binario y luego convierte ese número binario a decimal, en caso de ser posible. Caso contrario retornará "Valor inválido".
+        /// </summary>
+        /// <param name="binario"></param>
+        /// <returns></returns>
         public static string BinarioDecimal(string binario)
         {
-            if (!EsBinario(binario))
-            {
-                return "Valor inválido";
-            }
-            else
+            string strRetorno = "Valor inválido";
+            if (EsBinario(binario))
             {
                 int nDecimal = 0;
                 int pos = binario.Length;
@@ -102,26 +143,51 @@ namespace Entidades
                         nDecimal += (int)Math.Pow(2, pos);
                     }
                 }
-                return nDecimal.ToString();
+                strRetorno = nDecimal.ToString();
             }
+             return strRetorno; 
 
         }
 
+        /// <summary>
+        /// sobrecarga del operador +, recibe 2 objetos tipo operando, toma el atributo numero de cada uno y los suma
+        /// </summary>
+        /// <param name="n1"></param>
+        /// <param name="n2"></param>
+        /// <returns></returns>
         public static double operator +(Operando n1, Operando n2)
         {
             return n1.numero + n2.numero;
         }
 
+        /// <summary>
+        /// sobrecarga del operador -, recibe 2 objetos tipo operando, toma el atributo numero de cada uno y los resta
+        /// </summary>
+        /// <param name="n1"></param>
+        /// <param name="n2"></param>
+        /// <returns></returns>
         public static double operator -(Operando n1, Operando n2)
         {
             return n1.numero - n2.numero;
         }
 
+        /// <summary>
+        /// sobrecarga del operador *, recibe 2 objetos tipo operando, toma el atributo numero de cada uno y los multiplica
+        /// </summary>
+        /// <param name="n1"></param>
+        /// <param name="n2"></param>
+        /// <returns></returns>
         public static double operator *(Operando n1, Operando n2)
         {
             return n1.numero * n2.numero;
         }
 
+        /// <summary>
+        /// sobrecarga del operador /, recibe 2 objetos tipo operando, toma el atributo numero de cada uno y los divide. Si se tratara de una división por 0, retornará double.MinValue
+        /// </summary>
+        /// <param name="n1"></param>
+        /// <param name="n2"></param>
+        /// <returns></returns>
         public static double operator /(Operando n1, Operando n2)
         {
 

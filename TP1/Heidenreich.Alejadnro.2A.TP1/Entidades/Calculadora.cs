@@ -9,7 +9,13 @@ namespace Entidades
 {
     public static class Calculadora
     {
-
+        /// <summary>
+        /// mediante el operador, realiza la operacion deseada entre 2 tipos "Operando"
+        /// </summary>
+        /// <param name="num1"></param>
+        /// <param name="num2"></param>
+        /// <param name="operador"></param>
+        /// <returns></returns>
         public static double Operar(Operando num1, Operando num2, char operador)
         {
             double rsp = double.NaN;
@@ -32,13 +38,18 @@ namespace Entidades
             return rsp;
         }
 
+        /// <summary>
+        /// valida si el operando es distinto de (+), (-), (*) o (/) devuelve (+)
+        /// </summary>
+        /// <param name="operador"></param>
+        /// <returns></returns>
         private static char ValidadOperador(char operador)
         {
-            if (operador == '-' || operador == '*' || operador == '/')
+            if (operador != '+' && operador != '-' && operador != '*' && operador != '/')
             {
-                return operador;
+                operador = '+';
             }
-            return '+';
+            return operador;
         }
     }
 }
