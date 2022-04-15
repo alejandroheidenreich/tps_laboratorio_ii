@@ -101,7 +101,7 @@ namespace MiCalculadora
             {
                 op = "+";
             }
-            lstOperaciones.Items.Add($"{ValidarTxtBox(txtNumero1.Text)} {op} {ValidarTxtBox(txtNumero2.Text)} = {lblResultado.Text}");
+            lstOperaciones.Items.Add($"{ValidarTxtBox(txtNumero1.Text.Replace(".", ","))} {op} {ValidarTxtBox(txtNumero2.Text.Replace(".", ","))} = {lblResultado.Text.Replace(".", ",")}");
         }
 
         /// <summary>

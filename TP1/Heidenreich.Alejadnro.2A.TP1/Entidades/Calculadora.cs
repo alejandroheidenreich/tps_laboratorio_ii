@@ -35,7 +35,7 @@ namespace Entidades
                     break; 
             }
 
-            return rsp;
+            return Math.Round(rsp, 3, MidpointRounding.ToEven);
         }
 
         /// <summary>

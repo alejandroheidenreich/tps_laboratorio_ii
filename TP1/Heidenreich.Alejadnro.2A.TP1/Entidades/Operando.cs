@@ -59,7 +59,7 @@ namespace Entidades
         /// <returns></returns>
         private double ValidarOperando(string strNumero)
         {
-            if (!double.TryParse(strNumero, out double retorno))
+            if (!double.TryParse(strNumero.Replace(".", ","), out double retorno))
             {
                 retorno = 0;
             }
