@@ -37,7 +37,7 @@ namespace Entidades
         /// <returns></returns>
         public override string ToString()
         {
-            return Listar(this, ETipo.Todos);
+            return Taller.Listar(this, ETipo.Todos);
         }
         #endregion
 
@@ -96,13 +96,16 @@ namespace Entidades
         /// <returns></returns>
         public static Taller operator +(Taller taller, Vehiculo vehiculo)
         {
-            foreach (Vehiculo v in taller.vehiculos)
-            {
-                if (v == vehiculo)
-                    return taller;
-            }
             if (taller.vehiculos.Count < taller.espacioDisponible)
             {
+                foreach (Vehiculo v in taller.vehiculos)
+                {
+                    if (v == vehiculo)
+                    {
+                        return taller;
+                    }
+                        
+                }
                 taller.vehiculos.Add(vehiculo);
             }
             
